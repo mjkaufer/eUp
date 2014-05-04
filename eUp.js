@@ -16,11 +16,15 @@ if (Meteor.isClient) {
   }    
 
   function imgurDelim(url, del){
-   return url.substring(0,url.length - 4) + del + url.substring(url.length - 4); 
+	url = url.split('.');
+	url[2] = url[2] + del;
+	return url.join('.')
   }  
   
   function unDelim(url){
-   return url.substring(0,url.length - 5) + url.substring(url.length - 4); 
+	url = url.split('.');
+	url[2] = url[2].substring(0,url[2].length - 1);
+	return url.join('.')
   }  
   
   function alertFlash(m, t, time, fo){

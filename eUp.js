@@ -8,7 +8,6 @@ if (Meteor.isClient) {
   var delim = 'b'; // http://api.imgur.com/models/image
   var over = false;
   Session.set('fv', false);
-  Session.set('fvurl', Images.find({}, {sort: {date: -1}}).fetch()[0]);
     
   function preload(arrayOfImages) {
       $(arrayOfImages).each(function(){
@@ -48,8 +47,13 @@ if (Meteor.isClient) {
   });
   
   UI.registerHelper('viewurl', function(){
-  	return Session.get('fvurl')
+  	return Images.findOne({_id:Session.get('fvid')}).address;
   });  
+
+  UI.registerHelper('poster', function(){
+  	var name = Images.findOne({_id:Session.get('fvid')}).name;
+  	return name?name:"Anon";//if it doesn't have a name, for some strange reason...
+  })
 
   UI.registerHelper('fv', function(){
   	return Session.get('fv');
@@ -77,7 +81,7 @@ if (Meteor.isClient) {
       Session.set('load', Session.get('load') + inc);
     },
     'click img':function(event){
-      Session.set('fvurl', unDelim(event.currentTarget.src));
+      Session.set('fvid', event.currentTarget.id);
       Session.set('fv', true);
     }
   });
@@ -121,7 +125,6 @@ if (Meteor.isClient) {
       for(var i = 0; i < files.length; i++){
         if(files[i] && files[i].name.toLowerCase().match(/\.(jpg|jpeg|png|gif)$/)){
           window.last = files[i];          
-          // upload(fileToImage(files[i]));
           fileToImage(files[i], alertId);
 
         }

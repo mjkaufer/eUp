@@ -35,23 +35,14 @@
 
   <div>
   {{#each imlist}}
-    <div id="{{_id}}" class="indPic" style="border:solid #000 0.125em;float:left;padding:0;margin:1em;">
-      <!-- <img src="{{address}}" title="Posted by {{name}}" style="height:25vh;padding:0;"> -->
-      <!-- <input type="checkbox" id="{{_id}}" class="cb" style="position:absolute;"/> -->
-      <img src="{{small address}}" title="Posted by {{name}}" style="padding:0;height:10em;">
-
+    <div class="indPic" style="border:solid #000 0.125em;float:left;padding:0;margin:1em;">
+      <img src="{{small address}}" title="Posted by {{name}}" style="padding:0;height:10em;" id="{{_id}}">
     </div>
   {{/each}}
   </div>
   
   <br style="clear:both;">  
   {{#if canLoad}}
-    <!-- <div style="text-align:center;">
-      <button type="button" class="btn btn-default btn-lg" id="loadMore" style="margin: 0 auto;">
-        <p>Load More</p>
-        <span class="glyphicon glyphicon-chevron-down"></span>
-      </button>  
-    </div> -->
     <p>Scroll down to load more images.</p>
   {{else}}
     <p>Loaded all {{imCount}} images!</p>
@@ -81,7 +72,7 @@
 <template name="fullView">
   <div id="shade"></div>
   <div id="hold">
-    <img id="fvimg" src="{{viewurl}}">
+    <img id="fvimg" src="{{viewurl}}" title="Posted by {{poster}}">
   </div>  
 </template>
 

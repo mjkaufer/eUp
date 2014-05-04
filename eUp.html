@@ -1,0 +1,90 @@
+<head>
+  <title>eUp</title>
+</head>
+
+<body>
+  {{> outer}}
+</body>
+
+<template name="outer">
+  {{#if fv}}
+    {{> fullView}}
+  {{/if}}
+  
+  <div style="position:absolute; right:2em;">
+    {{> loginButtons}}
+  </div>
+  
+  {{> main}}
+  
+  {{> notifications}} 
+  <hr>
+  {{> footer}}
+</template>
+
+<template name="main">
+  <h1>eUp</h1>
+  
+  {{#if currentUser}}
+    <p>Welcome {{currentUser.services.facebook.name}}.</p>
+    <p>Upload pictures by dragging them onto the page.</p>
+  {{else}}
+    <p>You have to log in before you can upload pictures.</p>
+  {{/if}}
+
+
+  <div>
+  {{#each imlist}}
+    <div id="{{_id}}" class="indPic" style="border:solid #000 0.125em;float:left;padding:0;margin:1em;">
+      <!-- <img src="{{address}}" title="Posted by {{name}}" style="height:25vh;padding:0;"> -->
+      <!-- <input type="checkbox" id="{{_id}}" class="cb" style="position:absolute;"/> -->
+      <img src="{{small address}}" title="Posted by {{name}}" style="padding:0;height:10em;">
+
+    </div>
+  {{/each}}
+  </div>
+  
+  <br style="clear:both;">  
+  {{#if canLoad}}
+    <!-- <div style="text-align:center;">
+      <button type="button" class="btn btn-default btn-lg" id="loadMore" style="margin: 0 auto;">
+        <p>Load More</p>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </button>  
+    </div> -->
+    <p>Scroll down to load more images.</p>
+  {{else}}
+    <p>Loaded all {{imCount}} images!</p>
+  {{/if}}
+  
+  
+</template>
+
+
+<template name="notifications">
+  
+  <div id="cd" style="position:fixed;top:2em;">
+    {{#each alerts}}
+      <div class="alert alert-{{type}}" id="{{_id}}">
+      {{#if this.max}}
+        {{num}} / {{max}} images uploaded.
+      {{else}}
+        {{message}}
+      {{/if}}
+      </div>
+    {{/each}}
+  </div>  
+  
+</template>
+
+
+<template name="fullView">
+  <div id="shade"></div>
+  <div id="hold">
+    <img id="fvimg" src="{{viewurl}}">
+  </div>  
+</template>
+
+<template name="footer">
+  <p>Site by Matthew Kaufer</p>
+</template>

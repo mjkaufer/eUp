@@ -173,6 +173,7 @@ if (Meteor.isClient) {
 
   function upload(img, aid){
   	img = img.split(',')[1];
+  	var time = new Date();
     $.ajax({
         url: 'https://api.imgur.com/3/image',
         type: 'post',
@@ -186,7 +187,7 @@ if (Meteor.isClient) {
         success: function(response) {
             if(response.success) {
                 url = response.data.link;
-                Meteor.call('add', url);
+                Meteor.call('add', url, time);
               
                 Alerts.update({_id:aid},{$inc:{num:1}});
                 
@@ -222,9 +223,9 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.methods({
-    add : function(url){
+    add : function(url, time){
       if(Meteor.user())
-        Images.insert({address:url, name:Meteor.user().services.facebook.name, date:new Date()});
+        Images.insert({address:url, name:Meteor.user().services.facebook.name, date:time});
       else
         Images.insert({address:url, name:"Anon", date:new Date()});
     }

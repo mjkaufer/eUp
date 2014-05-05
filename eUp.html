@@ -30,9 +30,9 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <button class="accordion-toggle btn" data-toggle="collapse" href="#coll">Info</button>
+            <button class="accordion-toggle btn collapsed" data-toggle="collapse" href="#coll">Info</button>
         </div>
-        <div id="coll" class="collapse in">
+        <div id="coll" class="collapse out">
           <div class="panel-body">
             <p>Upload pictures by dragging them onto the page.</p>
             <p>Note: Imgur only allows 500 image uploads per user per day, so you might need to upload half of your files one day and half the next.</p>
@@ -41,6 +41,8 @@
           </div>
         </div>
     </div>
+
+
   {{else}}
     <p>You have to log in before you can upload pictures.</p>
   {{/if}}

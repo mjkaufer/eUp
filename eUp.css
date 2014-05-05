@@ -43,10 +43,11 @@
 }
 
 .panel-heading .accordion-toggle:after {
-    font-family: 'Glyphicons Halflings'; 
-    content: "\2212";    
-    float: right;        
+    content: "\00a0\00a0-";    
+    float: right;       
 }
+
 .panel-heading .accordion-toggle.collapsed:after {
-    content: "\2b";
+    content: "\00a0\00a0+";
+    float:right;
 }
